@@ -24,7 +24,7 @@ ls /usr/share/xml/scap/ssg/content/
 
 The identified file is `ssg-rhel10-ds.xml`
 
-![alt text](image.png)
+![alt text](images/image.png)
 
 Define the SCAP content path as an environment variable for easier reference:
 
@@ -42,7 +42,7 @@ To view the list of available profiles, run:
 oscap info $SCAP_CONTENT
 ```
 
-![alt text](<image1.png>)
+![alt text](<images/image1.png>)
 
 I selected **CIS Workstation Level 1** profile (`xccdf_org.ssgproject.content_profile_cis_workstation_l1`) to ensure GUI compatibility while maintaining a strong security posture.
 
@@ -51,15 +51,16 @@ I selected **CIS Workstation Level 1** profile (`xccdf_org.ssgproject.content_pr
 ```bash
 sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_workstation_l1 --results scan-results.xml --report report.html $SCAP_CONTENT
 ```
-![alt text](<image2.png>)
+
+![alt text](<images/image2.png>)
 
 This command generated `scan-results.xml` and `report.html`.
 
-![alt text](<image3.png>)
+![alt text](<images/image3.png>)
 
 Open scan-results.xml in Browser
 
-![alt text](<image4.png>)
+![alt text](<images/image4.png>)
 
 **Result:** The scan returned compliance score of **77.8%**. The report highlighted several misconfigurations that required remediation.
 
@@ -84,9 +85,9 @@ sudo ansible-playbook -i localhost, -c local ansible_hardening.yml
 **Issue:**
 During the playbook execution, Ansible failed with errors indicating missing modules (`community.general`, `ansible.posix`). This occurred because `ansible-core` provides only a minimal installation without additional collections.
 
-![alt text](<image5.png>)
+![alt text](<images/image5.png>)
 
-![alt text](<image6.png>)
+![alt text](<images/image6.png>)
 
 **Resolution:**
 The required collections were installed using `ansible-galaxy`:
@@ -103,9 +104,9 @@ With dependencies resolved, the hardening playbook was executed successfully:
 sudo ansible-playbook -i localhost, -c local ansible_hardening.yml
 ```
 
-![alt text](<image7.png>)
+![alt text](<images/image7.png>)
 
-![alt text](<image8.png>)
+![alt text](<images/image8.png>)
 
 ### Step 5: Verification
 
@@ -117,7 +118,7 @@ sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_worksta
 
 **Result:** The system successfully passed the compliance checks, achieving a score of **98.2%** and nearly full compliance with the CIS Workstation Level 1 profile. The automated remediation significantly improved the security posture of the RHEL 10 workstation.
 
-![alt text](<image9.png>)
+![alt text](<images/image9.png>)
 
 ## 4. Conclusion
 
